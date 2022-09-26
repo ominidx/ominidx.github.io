@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Managed Core - GraphQL API</title>
+    <title>Console V2 - GraphQL API</title>
     <link rel="stylesheet" href="stylesheets/spectaql.min.css" />
     <script src="javascripts/spectaql.min.js"></script>
   </head>
@@ -35,13 +35,22 @@
                 </h5>
                 <ul class="nav-group-section-items">
                   <li>
-                    <a href="#query-getUser">getUser</a>
+                    <a href="#query-frontendArtifacts">frontendArtifacts</a>
                   </li>
                   <li>
-                    <a href="#query-joinChannel">joinChannel</a>
+                    <a href="#query-heroku">heroku</a>
                   </li>
                   <li>
-                    <a href="#query-share">share</a>
+                    <a href="#query-projects">projects</a>
+                  </li>
+                  <li>
+                    <a href="#query-source_code">source_code</a>
+                  </li>
+                  <li>
+                    <a href="#query-user">user</a>
+                  </li>
+                  <li>
+                    <a href="#query-vercel">vercel</a>
                   </li>
                 </ul>
               </li>
@@ -51,28 +60,19 @@
                 </h5>
                 <ul class="nav-group-section-items">
                   <li>
-                    <a href="#mutation-createChannel">createChannel</a>
+                    <a href="#mutation-buildFrontend">buildFrontend</a>
                   </li>
                   <li>
-                    <a href="#mutation-logoutSession">logoutSession</a>
+                    <a href="#mutation-createProject">createProject</a>
                   </li>
                   <li>
-                    <a href="#mutation-mutePSTN">mutePSTN</a>
+                    <a href="#mutation-generateApiKey">generateApiKey</a>
                   </li>
                   <li>
-                    <a href="#mutation-setNormal">setNormal</a>
+                    <a href="#mutation-publishToHeroku">publishToHeroku</a>
                   </li>
                   <li>
-                    <a href="#mutation-setPresenter">setPresenter</a>
-                  </li>
-                  <li>
-                    <a href="#mutation-startRecordingSession">startRecordingSession</a>
-                  </li>
-                  <li>
-                    <a href="#mutation-stopRecordingSession">stopRecordingSession</a>
-                  </li>
-                  <li>
-                    <a href="#mutation-updateUserName">updateUserName</a>
+                    <a href="#mutation-publishToVercel">publishToVercel</a>
                   </li>
                 </ul>
               </li>
@@ -85,31 +85,46 @@
                 <a href="#definition-Boolean">Boolean</a>
               </li>
               <li>
+                <a href="#definition-DeployStatus">DeployStatus</a>
+              </li>
+              <li>
+                <a href="#definition-FrontendArtifacts">FrontendArtifacts</a>
+              </li>
+              <li>
+                <a href="#definition-FrontendBuildType">FrontendBuildType</a>
+              </li>
+              <li>
+                <a href="#definition-HerokuStatus">HerokuStatus</a>
+              </li>
+              <li>
+                <a href="#definition-ID">ID</a>
+              </li>
+              <li>
                 <a href="#definition-Int">Int</a>
               </li>
               <li>
-                <a href="#definition-PSTN">PSTN</a>
+                <a href="#definition-Project">Project</a>
               </li>
               <li>
-                <a href="#definition-Passphrase">Passphrase</a>
+                <a href="#definition-ProjectApikey">ProjectApikey</a>
               </li>
               <li>
-                <a href="#definition-Session">Session</a>
+                <a href="#definition-ProjectPreset">ProjectPreset</a>
               </li>
               <li>
-                <a href="#definition-ShareResponse">ShareResponse</a>
+                <a href="#definition-SourceCodeArchive">SourceCodeArchive</a>
               </li>
               <li>
                 <a href="#definition-String">String</a>
               </li>
               <li>
-                <a href="#definition-UIDMuteState">UIDMuteState</a>
+                <a href="#definition-Time">Time</a>
               </li>
               <li>
                 <a href="#definition-User">User</a>
               </li>
               <li>
-                <a href="#definition-UserCredentials">UserCredentials</a>
+                <a href="#definition-VercelStatus">VercelStatus</a>
               </li>
             </ul>
           </div>
@@ -123,7 +138,7 @@
           </button>
         </div>
         <article id="content">
-          <h1 class="doc-heading">Managed Core - GraphQL API</h1>
+          <h1 class="doc-heading">Console V2 - GraphQL API</h1>
           <div id="introduction" data-traverse-target="introduction">
             <div id="welcome" class="doc-row">
               <div class="doc-copy">
@@ -131,13 +146,439 @@
               </div>
               <div class="doc-examples">
                 <div class="example-section welcome-api-endpoints-section example-section-is-code">
-                  <h5>API Endpoints</h5> <pre><code>https://ms-dev.rteappbuilder.com/query</code></pre> </div>
+                  <h5>API Endpoints</h5> <pre><code>https://dev-v3.rteappbuilder.com/query</code></pre> </div>
               </div>
             </div>
           </div>
           <h1 id="group-Operations-Queries" class="group-heading" data-traverse-target="group-Operations-Queries">Queries</h1>
-          <section id="query-getUser" class="operation operation-query" data-traverse-target="query-getUser">
-            <h2 class="operation-heading "> <code>getUser</code> </h2>
+          <section id="query-frontendArtifacts" class="operation operation-query" data-traverse-target="query-frontendArtifacts">
+            <h2 class="operation-heading "> <code>frontendArtifacts</code> </h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <div class="operation-response doc-copy-section">
+                  <h5>Response</h5>
+                  <p> Returns a
+                    <a href="#definition-FrontendArtifacts"><code>FrontendArtifacts!</code></a>
+                  </p>
+                </div>
+                <div class="operation-arguments doc-copy-section">
+                  <h5>Arguments</h5>
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <span class="property-name"><code>project_id</code></span> -
+                          <span class="property-type">
+                            <a href="#definition-ID"><code>ID!</code></a>
+                          </span>
+                        </td>
+                        <td> </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="doc-examples">
+                <h4 class="example-heading">Example</h4>
+                <div class="example-section example-section-is-code operation-query-example">
+                  <h5>Query</h5>
+                  <html>
+                  <head></head>
+                  <body><pre><code class="hljs language-gql"><span class="hljs-symbol"><span class="hljs-keyword">query</span> frontendArtifacts<span class="hljs-tag">(<span class="hljs-code">$project_id</span>: ID!)</span> <span class="hljs-tag">{
+  <span class="hljs-symbol">frontendArtifacts<span class="hljs-tag">(project_id: <span class="hljs-code">$project_id</span>)</span> <span class="hljs-tag">{
+    <span class="hljs-symbol">turnkey</span>
+    <span class="hljs-symbol">reactsdk</span>
+    <span class="hljs-symbol">websdk</span>
+  }</span></span>
+}</span></span>
+</code></pre> </body>
+                  </html>
+                </div>
+                <div class="example-section example-section-is-code operation-variables-example">
+                  <h5>Variables</h5>
+                  <html>
+                  <head></head>
+                  <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span><span class="hljs-attr">"project_id"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"4"</span><span class="hljs-punctuation">}</span>
+</code></pre> </body>
+                  </html>
+                </div>
+                <div class="example-section example-section-is-code operation-response-example">
+                  <h5>Response</h5>
+                  <html>
+                  <head></head>
+                  <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">"data"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">"frontendArtifacts"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+      <span class="hljs-attr">"turnkey"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">"reactsdk"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">"websdk"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">"abc123"</span><span class="hljs-punctuation">]</span>
+    <span class="hljs-punctuation">}</span>
+  <span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">}</span>
+</code></pre> </body>
+                  </html>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section id="query-heroku" class="operation operation-query" data-traverse-target="query-heroku">
+            <div class="operation-group-name">
+              <a href="#group-Operations-Queries">Queries</a>
+            </div>
+            <h2 class="operation-heading "> <code>heroku</code> </h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <div class="operation-response doc-copy-section">
+                  <h5>Response</h5>
+                  <p> Returns a
+                    <a href="#definition-HerokuStatus"><code>HerokuStatus!</code></a>
+                  </p>
+                </div>
+                <div class="operation-arguments doc-copy-section">
+                  <h5>Arguments</h5>
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <span class="property-name"><code>project_id</code></span> -
+                          <span class="property-type">
+                            <a href="#definition-ID"><code>ID!</code></a>
+                          </span>
+                        </td>
+                        <td> </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="doc-examples">
+                <h4 class="example-heading">Example</h4>
+                <div class="example-section example-section-is-code operation-query-example">
+                  <h5>Query</h5>
+                  <html>
+                  <head></head>
+                  <body><pre><code class="hljs language-gql"><span class="hljs-symbol"><span class="hljs-keyword">query</span> heroku<span class="hljs-tag">(<span class="hljs-code">$project_id</span>: ID!)</span> <span class="hljs-tag">{
+  <span class="hljs-symbol">heroku<span class="hljs-tag">(project_id: <span class="hljs-code">$project_id</span>)</span> <span class="hljs-tag">{
+    <span class="hljs-symbol">status</span>
+    <span class="hljs-symbol">message</span>
+    <span class="hljs-symbol">url</span>
+    <span class="hljs-symbol">appname</span>
+  }</span></span>
+}</span></span>
+</code></pre> </body>
+                  </html>
+                </div>
+                <div class="example-section example-section-is-code operation-variables-example">
+                  <h5>Variables</h5>
+                  <html>
+                  <head></head>
+                  <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span><span class="hljs-attr">"project_id"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"4"</span><span class="hljs-punctuation">}</span>
+</code></pre> </body>
+                  </html>
+                </div>
+                <div class="example-section example-section-is-code operation-response-example">
+                  <h5>Response</h5>
+                  <html>
+                  <head></head>
+                  <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">"data"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">"heroku"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+      <span class="hljs-attr">"status"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"SUCCESS"</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">"message"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">"url"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">"appname"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span>
+    <span class="hljs-punctuation">}</span>
+  <span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">}</span>
+</code></pre> </body>
+                  </html>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section id="query-projects" class="operation operation-query" data-traverse-target="query-projects">
+            <div class="operation-group-name">
+              <a href="#group-Operations-Queries">Queries</a>
+            </div>
+            <h2 class="operation-heading "> <code>projects</code> </h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <div class="operation-response doc-copy-section">
+                  <h5>Response</h5>
+                  <p> Returns
+                    <a href="#definition-Project"><code>[Project!]!</code></a>
+                  </p>
+                </div>
+                <div class="operation-arguments doc-copy-section">
+                  <h5>Arguments</h5>
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <span class="property-name"><code>project_id</code></span> -
+                          <span class="property-type">
+                            <a href="#definition-ID"><code>ID</code></a>
+                          </span>
+                        </td>
+                        <td> </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="doc-examples">
+                <h4 class="example-heading">Example</h4>
+                <div class="example-section example-section-is-code operation-query-example">
+                  <h5>Query</h5>
+                  <html>
+                  <head></head>
+                  <body><pre><code class="hljs language-gql"><span class="hljs-symbol"><span class="hljs-keyword">query</span> projects<span class="hljs-tag">(<span class="hljs-code">$project_id</span>: ID)</span> <span class="hljs-tag">{
+  <span class="hljs-symbol">projects<span class="hljs-tag">(project_id: <span class="hljs-code">$project_id</span>)</span> <span class="hljs-tag">{
+    <span class="hljs-symbol">id</span>
+    <span class="hljs-symbol">product_id</span>
+    <span class="hljs-symbol">product_name</span>
+    <span class="hljs-symbol">app_id</span>
+    <span class="hljs-symbol">api_key</span>
+    <span class="hljs-symbol">backend_app_id</span>
+    <span class="hljs-symbol">app_certificate</span>
+    <span class="hljs-symbol">primary_color</span>
+    <span class="hljs-symbol">frontend_endpoint</span>
+    <span class="hljs-symbol">backend_endpoint</span>
+    <span class="hljs-symbol">pstn</span>
+    <span class="hljs-symbol">precall</span>
+    <span class="hljs-symbol">primary_logo</span>
+    <span class="hljs-symbol">primary_square_logo</span>
+    <span class="hljs-symbol">primary_background_logo</span>
+    <span class="hljs-symbol">chat</span>
+    <span class="hljs-symbol">project_template</span>
+    <span class="hljs-symbol">cloud_recording</span>
+    <span class="hljs-symbol">screen_sharing</span>
+    <span class="hljs-symbol">encryption_enabled</span>
+    <span class="hljs-symbol">landing_sub_heading</span>
+    <span class="hljs-symbol">primary_font_color</span>
+    <span class="hljs-symbol">secondary_font_color</span>
+    <span class="hljs-symbol">sentry_dsn</span>
+    <span class="hljs-symbol">enable_google_oauth</span>
+    <span class="hljs-symbol">enable_apple_oauth</span>
+    <span class="hljs-symbol">enable_slack_oauth</span>
+    <span class="hljs-symbol">enable_microsoft_oauth</span>
+    <span class="hljs-symbol">google_client_id</span>
+    <span class="hljs-symbol">google_client_secret</span>
+    <span class="hljs-symbol">microsoft_client_id</span>
+    <span class="hljs-symbol">microsoft_client_secret</span>
+    <span class="hljs-symbol">slack_client_id</span>
+    <span class="hljs-symbol">slack_client_secret</span>
+    <span class="hljs-symbol">apple_client_id</span>
+    <span class="hljs-symbol">apple_private_key</span>
+    <span class="hljs-symbol">apple_key_id</span>
+    <span class="hljs-symbol">apple_team_id</span>
+    <span class="hljs-symbol">customer_id</span>
+    <span class="hljs-symbol">customer_certificate</span>
+    <span class="hljs-symbol">bucket_name</span>
+    <span class="hljs-symbol">recording_region</span>
+    <span class="hljs-symbol">bucket_access_key</span>
+    <span class="hljs-symbol">bucket_access_secret</span>
+    <span class="hljs-symbol">pstn_email</span>
+    <span class="hljs-symbol">pstn_password</span>
+    <span class="hljs-symbol">pstn_account</span>
+    <span class="hljs-symbol">video_profile</span>
+    <span class="hljs-symbol">frontend_deploy_status</span>
+    <span class="hljs-symbol">backend_deploy_status</span>
+    <span class="hljs-symbol">created_at</span>
+    <span class="hljs-symbol">updated_at</span>
+    <span class="hljs-symbol">log_enabled</span>
+    <span class="hljs-symbol">geo_fencing</span>
+    <span class="hljs-symbol">event_mode</span>
+    <span class="hljs-symbol">raise_hand</span>
+  }</span></span>
+}</span></span>
+</code></pre> </body>
+                  </html>
+                </div>
+                <div class="example-section example-section-is-code operation-variables-example">
+                  <h5>Variables</h5>
+                  <html>
+                  <head></head>
+                  <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span><span class="hljs-attr">"project_id"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">4</span><span class="hljs-punctuation">}</span>
+</code></pre> </body>
+                  </html>
+                </div>
+                <div class="example-section example-section-is-code operation-response-example">
+                  <h5>Response</h5>
+                  <html>
+                  <head></head>
+                  <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">"data"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">"projects"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+      <span class="hljs-punctuation">{</span>
+        <span class="hljs-attr">"id"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"4"</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">"product_id"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">"product_name"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">"app_id"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">"api_key"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">"backend_app_id"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">"app_certificate"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">"primary_color"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">"frontend_endpoint"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">"backend_endpoint"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">"pstn"</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">"precall"</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">"primary_logo"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">"primary_square_logo"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">"primary_background_logo"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">"chat"</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">"project_template"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"MEETING"</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">"cloud_recording"</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">"screen_sharing"</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">"encryption_enabled"</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">"landing_sub_heading"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">"primary_font_color"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">"secondary_font_color"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">"sentry_dsn"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">"enable_google_oauth"</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">"enable_apple_oauth"</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">"enable_slack_oauth"</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">"enable_microsoft_oauth"</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">"google_client_id"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">"google_client_secret"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">"microsoft_client_id"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">"microsoft_client_secret"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">"slack_client_id"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">"slack_client_secret"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">"apple_client_id"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">"apple_private_key"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">"apple_key_id"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">"apple_team_id"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">"customer_id"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">"customer_certificate"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">"bucket_name"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">"recording_region"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">123</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">"bucket_access_key"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">"bucket_access_secret"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">"pstn_email"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">"pstn_password"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">"pstn_account"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">"video_profile"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">"frontend_deploy_status"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"SUCCESS"</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">"backend_deploy_status"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"SUCCESS"</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">"created_at"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"10:15:30Z"</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">"updated_at"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"10:15:30Z"</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">"log_enabled"</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">"geo_fencing"</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">"event_mode"</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">"raise_hand"</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span>
+      <span class="hljs-punctuation">}</span>
+    <span class="hljs-punctuation">]</span>
+  <span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">}</span>
+</code></pre> </body>
+                  </html>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section id="query-source_code" class="operation operation-query" data-traverse-target="query-source_code">
+            <div class="operation-group-name">
+              <a href="#group-Operations-Queries">Queries</a>
+            </div>
+            <h2 class="operation-heading "> <code>source_code</code> </h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <div class="operation-response doc-copy-section">
+                  <h5>Response</h5>
+                  <p> Returns a
+                    <a href="#definition-SourceCodeArchive"><code>SourceCodeArchive!</code></a>
+                  </p>
+                </div>
+                <div class="operation-arguments doc-copy-section">
+                  <h5>Arguments</h5>
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <span class="property-name"><code>project_id</code></span> -
+                          <span class="property-type">
+                            <a href="#definition-ID"><code>ID!</code></a>
+                          </span>
+                        </td>
+                        <td> </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="doc-examples">
+                <h4 class="example-heading">Example</h4>
+                <div class="example-section example-section-is-code operation-query-example">
+                  <h5>Query</h5>
+                  <html>
+                  <head></head>
+                  <body><pre><code class="hljs language-gql"><span class="hljs-symbol"><span class="hljs-keyword">query</span> source_code<span class="hljs-tag">(<span class="hljs-code">$project_id</span>: ID!)</span> <span class="hljs-tag">{
+  <span class="hljs-symbol">source_code<span class="hljs-tag">(project_id: <span class="hljs-code">$project_id</span>)</span> <span class="hljs-tag">{
+    <span class="hljs-symbol">npm_package</span>
+    <span class="hljs-symbol">theme</span>
+    <span class="hljs-symbol">config</span>
+  }</span></span>
+}</span></span>
+</code></pre> </body>
+                  </html>
+                </div>
+                <div class="example-section example-section-is-code operation-variables-example">
+                  <h5>Variables</h5>
+                  <html>
+                  <head></head>
+                  <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span><span class="hljs-attr">"project_id"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"4"</span><span class="hljs-punctuation">}</span>
+</code></pre> </body>
+                  </html>
+                </div>
+                <div class="example-section example-section-is-code operation-response-example">
+                  <h5>Response</h5>
+                  <html>
+                  <head></head>
+                  <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">"data"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">"source_code"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+      <span class="hljs-attr">"npm_package"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">"theme"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">"config"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span>
+    <span class="hljs-punctuation">}</span>
+  <span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">}</span>
+</code></pre> </body>
+                  </html>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section id="query-user" class="operation operation-query" data-traverse-target="query-user">
+            <div class="operation-group-name">
+              <a href="#group-Operations-Queries">Queries</a>
+            </div>
+            <h2 class="operation-heading "> <code>user</code> </h2>
             <div class="doc-row">
               <div class="doc-copy">
                 <div class="operation-response doc-copy-section">
@@ -153,9 +594,8 @@
                   <h5>Query</h5>
                   <html>
                   <head></head>
-                  <body><pre><code class="hljs language-gql"><span class="hljs-symbol"><span class="hljs-keyword">query</span> getUser <span class="hljs-tag">{
-  <span class="hljs-symbol">getUser <span class="hljs-tag">{
-    <span class="hljs-symbol">name</span>
+                  <body><pre><code class="hljs language-gql"><span class="hljs-symbol"><span class="hljs-keyword">query</span> user <span class="hljs-tag">{
+  <span class="hljs-symbol">user <span class="hljs-tag">{
     <span class="hljs-symbol">email</span>
   }</span></span>
 }</span></span>
@@ -166,31 +606,24 @@
                   <h5>Response</h5>
                   <html>
                   <head></head>
-                  <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
-  <span class="hljs-attr">"data"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
-    <span class="hljs-attr">"getUser"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
-      <span class="hljs-attr">"name"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
-      <span class="hljs-attr">"email"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span>
-    <span class="hljs-punctuation">}</span>
-  <span class="hljs-punctuation">}</span>
-<span class="hljs-punctuation">}</span>
+                  <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span><span class="hljs-attr">"data"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span><span class="hljs-attr">"user"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span><span class="hljs-attr">"email"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">}</span><span class="hljs-punctuation">}</span><span class="hljs-punctuation">}</span>
 </code></pre> </body>
                   </html>
                 </div>
               </div>
             </div>
           </section>
-          <section id="query-joinChannel" class="operation operation-query" data-traverse-target="query-joinChannel">
+          <section id="query-vercel" class="operation operation-query" data-traverse-target="query-vercel">
             <div class="operation-group-name">
               <a href="#group-Operations-Queries">Queries</a>
             </div>
-            <h2 class="operation-heading "> <code>joinChannel</code> </h2>
+            <h2 class="operation-heading "> <code>vercel</code> </h2>
             <div class="doc-row">
               <div class="doc-copy">
                 <div class="operation-response doc-copy-section">
                   <h5>Response</h5>
                   <p> Returns a
-                    <a href="#definition-Session"><code>Session!</code></a>
+                    <a href="#definition-VercelStatus"><code>VercelStatus!</code></a>
                   </p>
                 </div>
                 <div class="operation-arguments doc-copy-section">
@@ -205,9 +638,9 @@
                     <tbody>
                       <tr>
                         <td>
-                          <span class="property-name"><code>passphrase</code></span> -
+                          <span class="property-name"><code>project_id</code></span> -
                           <span class="property-type">
-                            <a href="#definition-String"><code>String!</code></a>
+                            <a href="#definition-ID"><code>ID!</code></a>
                           </span>
                         </td>
                         <td> </td>
@@ -222,18 +655,12 @@
                   <h5>Query</h5>
                   <html>
                   <head></head>
-                  <body><pre><code class="hljs language-gql"><span class="hljs-symbol"><span class="hljs-keyword">query</span> joinChannel<span class="hljs-tag">(<span class="hljs-code">$passphrase</span>:<span class="hljs-type"> String!</span>)</span> <span class="hljs-tag">{
-  <span class="hljs-symbol">joinChannel<span class="hljs-tag">(passphrase: <span class="hljs-code">$passphrase</span>)</span> <span class="hljs-tag">{
-    <span class="hljs-symbol">channel</span>
-    <span class="hljs-symbol">title</span>
-    <span class="hljs-symbol">isHost</span>
-    <span class="hljs-symbol">secret</span>
-    <span class="hljs-symbol">mainUser <span class="hljs-tag">{
-      <span class="hljs-type">...UserCredentialsFragment</span>
-    }</span></span>
-    <span class="hljs-symbol">screenShare <span class="hljs-tag">{
-      <span class="hljs-type">...UserCredentialsFragment</span>
-    }</span></span>
+                  <body><pre><code class="hljs language-gql"><span class="hljs-symbol"><span class="hljs-keyword">query</span> vercel<span class="hljs-tag">(<span class="hljs-code">$project_id</span>: ID!)</span> <span class="hljs-tag">{
+  <span class="hljs-symbol">vercel<span class="hljs-tag">(project_id: <span class="hljs-code">$project_id</span>)</span> <span class="hljs-tag">{
+    <span class="hljs-symbol">status</span>
+    <span class="hljs-symbol">message</span>
+    <span class="hljs-symbol">url</span>
+    <span class="hljs-symbol">appname</span>
   }</span></span>
 }</span></span>
 </code></pre> </body>
@@ -243,7 +670,7 @@
                   <h5>Variables</h5>
                   <html>
                   <head></head>
-                  <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span><span class="hljs-attr">"passphrase"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">}</span>
+                  <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span><span class="hljs-attr">"project_id"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"4"</span><span class="hljs-punctuation">}</span>
 </code></pre> </body>
                   </html>
                 </div>
@@ -253,98 +680,11 @@
                   <head></head>
                   <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">"data"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
-    <span class="hljs-attr">"joinChannel"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
-      <span class="hljs-attr">"channel"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
-      <span class="hljs-attr">"title"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
-      <span class="hljs-attr">"isHost"</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span>
-      <span class="hljs-attr">"secret"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
-      <span class="hljs-attr">"mainUser"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">UserCredentials</span><span class="hljs-punctuation">,</span>
-      <span class="hljs-attr">"screenShare"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">UserCredentials</span>
-    <span class="hljs-punctuation">}</span>
-  <span class="hljs-punctuation">}</span>
-<span class="hljs-punctuation">}</span>
-</code></pre> </body>
-                  </html>
-                </div>
-              </div>
-            </div>
-          </section>
-          <section id="query-share" class="operation operation-query" data-traverse-target="query-share">
-            <div class="operation-group-name">
-              <a href="#group-Operations-Queries">Queries</a>
-            </div>
-            <h2 class="operation-heading "> <code>share</code> </h2>
-            <div class="doc-row">
-              <div class="doc-copy">
-                <div class="operation-response doc-copy-section">
-                  <h5>Response</h5>
-                  <p> Returns a
-                    <a href="#definition-ShareResponse"><code>ShareResponse!</code></a>
-                  </p>
-                </div>
-                <div class="operation-arguments doc-copy-section">
-                  <h5>Arguments</h5>
-                  <table>
-                    <thead>
-                      <tr>
-                        <th>Name</th>
-                        <th>Description</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>
-                          <span class="property-name"><code>passphrase</code></span> -
-                          <span class="property-type">
-                            <a href="#definition-String"><code>String!</code></a>
-                          </span>
-                        </td>
-                        <td> </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-              <div class="doc-examples">
-                <h4 class="example-heading">Example</h4>
-                <div class="example-section example-section-is-code operation-query-example">
-                  <h5>Query</h5>
-                  <html>
-                  <head></head>
-                  <body><pre><code class="hljs language-gql"><span class="hljs-symbol"><span class="hljs-keyword">query</span> share<span class="hljs-tag">(<span class="hljs-code">$passphrase</span>:<span class="hljs-type"> String!</span>)</span> <span class="hljs-tag">{
-  <span class="hljs-symbol">share<span class="hljs-tag">(passphrase: <span class="hljs-code">$passphrase</span>)</span> <span class="hljs-tag">{
-    <span class="hljs-symbol">passphrase <span class="hljs-tag">{
-      <span class="hljs-type">...PassphraseFragment</span>
-    }</span></span>
-    <span class="hljs-symbol">channel</span>
-    <span class="hljs-symbol">title</span>
-    <span class="hljs-symbol">pstn <span class="hljs-tag">{
-      <span class="hljs-type">...PSTNFragment</span>
-    }</span></span>
-  }</span></span>
-}</span></span>
-</code></pre> </body>
-                  </html>
-                </div>
-                <div class="example-section example-section-is-code operation-variables-example">
-                  <h5>Variables</h5>
-                  <html>
-                  <head></head>
-                  <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span><span class="hljs-attr">"passphrase"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">}</span>
-</code></pre> </body>
-                  </html>
-                </div>
-                <div class="example-section example-section-is-code operation-response-example">
-                  <h5>Response</h5>
-                  <html>
-                  <head></head>
-                  <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
-  <span class="hljs-attr">"data"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
-    <span class="hljs-attr">"share"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
-      <span class="hljs-attr">"passphrase"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">Passphrase</span><span class="hljs-punctuation">,</span>
-      <span class="hljs-attr">"channel"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
-      <span class="hljs-attr">"title"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
-      <span class="hljs-attr">"pstn"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">PSTN</span>
+    <span class="hljs-attr">"vercel"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+      <span class="hljs-attr">"status"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"SUCCESS"</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">"message"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">"url"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">"appname"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span>
     <span class="hljs-punctuation">}</span>
   <span class="hljs-punctuation">}</span>
 <span class="hljs-punctuation">}</span>
@@ -355,14 +695,14 @@
             </div>
           </section>
           <h1 id="group-Operations-Mutations" class="group-heading" data-traverse-target="group-Operations-Mutations">Mutations</h1>
-          <section id="mutation-createChannel" class="operation operation-mutation" data-traverse-target="mutation-createChannel">
-            <h2 class="operation-heading "> <code>createChannel</code> </h2>
+          <section id="mutation-buildFrontend" class="operation operation-mutation" data-traverse-target="mutation-buildFrontend">
+            <h2 class="operation-heading "> <code>buildFrontend</code> </h2>
             <div class="doc-row">
               <div class="doc-copy">
                 <div class="operation-response doc-copy-section">
                   <h5>Response</h5>
                   <p> Returns a
-                    <a href="#definition-ShareResponse"><code>ShareResponse!</code></a>
+                    <a href="#definition-String"><code>String!</code></a>
                   </p>
                 </div>
                 <div class="operation-arguments doc-copy-section">
@@ -377,30 +717,21 @@
                     <tbody>
                       <tr>
                         <td>
-                          <span class="property-name"><code>title</code></span> -
+                          <span class="property-name"><code>project_id</code></span> -
                           <span class="property-type">
-                            <a href="#definition-String"><code>String!</code></a>
+                            <a href="#definition-ID"><code>ID!</code></a>
                           </span>
                         </td>
                         <td> </td>
                       </tr>
                       <tr>
                         <td>
-                          <span class="property-name"><code>backendURL</code></span> -
+                          <span class="property-name"><code>preset</code></span> -
                           <span class="property-type">
-                            <a href="#definition-String"><code>String!</code></a>
+                            <a href="#definition-FrontendBuildType"><code>FrontendBuildType!</code></a>
                           </span>
                         </td>
                         <td> </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <span class="property-name"><code>enablePSTN</code></span> -
-                          <span class="property-type">
-                            <a href="#definition-Boolean"><code>Boolean</code></a>
-                          </span>
-                        </td>
-                        <td> Default = <code>false</code> </td>
                       </tr>
                     </tbody>
                   </table>
@@ -412,24 +743,152 @@
                   <h5>Query</h5>
                   <html>
                   <head></head>
-                  <body><pre><code class="hljs language-gql"><span class="hljs-symbol"><span class="hljs-keyword">mutation</span> createChannel<span class="hljs-tag">(
-  <span class="hljs-code">$title</span>:<span class="hljs-type"> String!</span>,
-  <span class="hljs-code">$backendURL</span>:<span class="hljs-type"> String!</span>,
-  <span class="hljs-code">$enablePSTN</span>:<span class="hljs-type"> Boolean
-</span>)</span> <span class="hljs-tag">{
-  <span class="hljs-symbol">createChannel<span class="hljs-tag">(
-    title: <span class="hljs-code">$title</span>,
-    backendURL: <span class="hljs-code">$backendURL</span>,
-    enablePSTN: <span class="hljs-code">$enablePSTN</span>
+                  <body><pre><code class="hljs language-gql"><span class="hljs-symbol"><span class="hljs-keyword">mutation</span> buildFrontend<span class="hljs-tag">(
+  <span class="hljs-code">$project_id</span>: ID!,
+  <span class="hljs-code">$preset</span>:<span class="hljs-type"> FrontendBuildType!</span>
+)</span> <span class="hljs-tag">{
+  <span class="hljs-symbol">buildFrontend<span class="hljs-tag">(
+    project_id: <span class="hljs-code">$project_id</span>,
+    preset: <span class="hljs-code">$preset</span>
+  )</span></span>
+}</span></span>
+</code></pre> </body>
+                  </html>
+                </div>
+                <div class="example-section example-section-is-code operation-variables-example">
+                  <h5>Variables</h5>
+                  <html>
+                  <head></head>
+                  <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span><span class="hljs-attr">"project_id"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">4</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">"preset"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"TURNKEY"</span><span class="hljs-punctuation">}</span>
+</code></pre> </body>
+                  </html>
+                </div>
+                <div class="example-section example-section-is-code operation-response-example">
+                  <h5>Response</h5>
+                  <html>
+                  <head></head>
+                  <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span><span class="hljs-attr">"data"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span><span class="hljs-attr">"buildFrontend"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">}</span><span class="hljs-punctuation">}</span>
+</code></pre> </body>
+                  </html>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section id="mutation-createProject" class="operation operation-mutation" data-traverse-target="mutation-createProject">
+            <div class="operation-group-name">
+              <a href="#group-Operations-Mutations">Mutations</a>
+            </div>
+            <h2 class="operation-heading "> <code>createProject</code> </h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <div class="operation-response doc-copy-section">
+                  <h5>Response</h5>
+                  <p> Returns a
+                    <a href="#definition-Project"><code>Project!</code></a>
+                  </p>
+                </div>
+                <div class="operation-arguments doc-copy-section">
+                  <h5>Arguments</h5>
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <span class="property-name"><code>product_name</code></span> -
+                          <span class="property-type">
+                            <a href="#definition-String"><code>String!</code></a>
+                          </span>
+                        </td>
+                        <td> </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <span class="property-name"><code>preset</code></span> -
+                          <span class="property-type">
+                            <a href="#definition-ProjectPreset"><code>ProjectPreset!</code></a>
+                          </span>
+                        </td>
+                        <td> </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="doc-examples">
+                <h4 class="example-heading">Example</h4>
+                <div class="example-section example-section-is-code operation-query-example">
+                  <h5>Query</h5>
+                  <html>
+                  <head></head>
+                  <body><pre><code class="hljs language-gql"><span class="hljs-symbol"><span class="hljs-keyword">mutation</span> createProject<span class="hljs-tag">(
+  <span class="hljs-code">$product_name</span>:<span class="hljs-type"> String!</span>,
+  <span class="hljs-code">$preset</span>:<span class="hljs-type"> ProjectPreset!</span>
+)</span> <span class="hljs-tag">{
+  <span class="hljs-symbol">createProject<span class="hljs-tag">(
+    product_name: <span class="hljs-code">$product_name</span>,
+    preset: <span class="hljs-code">$preset</span>
   )</span> <span class="hljs-tag">{
-    <span class="hljs-symbol">passphrase <span class="hljs-tag">{
-      <span class="hljs-type">...PassphraseFragment</span>
-    }</span></span>
-    <span class="hljs-symbol">channel</span>
-    <span class="hljs-symbol">title</span>
-    <span class="hljs-symbol">pstn <span class="hljs-tag">{
-      <span class="hljs-type">...PSTNFragment</span>
-    }</span></span>
+    <span class="hljs-symbol">id</span>
+    <span class="hljs-symbol">product_id</span>
+    <span class="hljs-symbol">product_name</span>
+    <span class="hljs-symbol">app_id</span>
+    <span class="hljs-symbol">api_key</span>
+    <span class="hljs-symbol">backend_app_id</span>
+    <span class="hljs-symbol">app_certificate</span>
+    <span class="hljs-symbol">primary_color</span>
+    <span class="hljs-symbol">frontend_endpoint</span>
+    <span class="hljs-symbol">backend_endpoint</span>
+    <span class="hljs-symbol">pstn</span>
+    <span class="hljs-symbol">precall</span>
+    <span class="hljs-symbol">primary_logo</span>
+    <span class="hljs-symbol">primary_square_logo</span>
+    <span class="hljs-symbol">primary_background_logo</span>
+    <span class="hljs-symbol">chat</span>
+    <span class="hljs-symbol">project_template</span>
+    <span class="hljs-symbol">cloud_recording</span>
+    <span class="hljs-symbol">screen_sharing</span>
+    <span class="hljs-symbol">encryption_enabled</span>
+    <span class="hljs-symbol">landing_sub_heading</span>
+    <span class="hljs-symbol">primary_font_color</span>
+    <span class="hljs-symbol">secondary_font_color</span>
+    <span class="hljs-symbol">sentry_dsn</span>
+    <span class="hljs-symbol">enable_google_oauth</span>
+    <span class="hljs-symbol">enable_apple_oauth</span>
+    <span class="hljs-symbol">enable_slack_oauth</span>
+    <span class="hljs-symbol">enable_microsoft_oauth</span>
+    <span class="hljs-symbol">google_client_id</span>
+    <span class="hljs-symbol">google_client_secret</span>
+    <span class="hljs-symbol">microsoft_client_id</span>
+    <span class="hljs-symbol">microsoft_client_secret</span>
+    <span class="hljs-symbol">slack_client_id</span>
+    <span class="hljs-symbol">slack_client_secret</span>
+    <span class="hljs-symbol">apple_client_id</span>
+    <span class="hljs-symbol">apple_private_key</span>
+    <span class="hljs-symbol">apple_key_id</span>
+    <span class="hljs-symbol">apple_team_id</span>
+    <span class="hljs-symbol">customer_id</span>
+    <span class="hljs-symbol">customer_certificate</span>
+    <span class="hljs-symbol">bucket_name</span>
+    <span class="hljs-symbol">recording_region</span>
+    <span class="hljs-symbol">bucket_access_key</span>
+    <span class="hljs-symbol">bucket_access_secret</span>
+    <span class="hljs-symbol">pstn_email</span>
+    <span class="hljs-symbol">pstn_password</span>
+    <span class="hljs-symbol">pstn_account</span>
+    <span class="hljs-symbol">video_profile</span>
+    <span class="hljs-symbol">frontend_deploy_status</span>
+    <span class="hljs-symbol">backend_deploy_status</span>
+    <span class="hljs-symbol">created_at</span>
+    <span class="hljs-symbol">updated_at</span>
+    <span class="hljs-symbol">log_enabled</span>
+    <span class="hljs-symbol">geo_fencing</span>
+    <span class="hljs-symbol">event_mode</span>
+    <span class="hljs-symbol">raise_hand</span>
   }</span></span>
 }</span></span>
 </code></pre> </body>
@@ -440,9 +899,8 @@
                   <html>
                   <head></head>
                   <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
-  <span class="hljs-attr">"title"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"backendURL"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"enablePSTN"</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span>
+  <span class="hljs-attr">"product_name"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"preset"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"MEETING"</span>
 <span class="hljs-punctuation">}</span>
 </code></pre> </body>
                   </html>
@@ -453,11 +911,63 @@
                   <head></head>
                   <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">"data"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
-    <span class="hljs-attr">"createChannel"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
-      <span class="hljs-attr">"passphrase"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">Passphrase</span><span class="hljs-punctuation">,</span>
-      <span class="hljs-attr">"channel"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
-      <span class="hljs-attr">"title"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
-      <span class="hljs-attr">"pstn"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">PSTN</span>
+    <span class="hljs-attr">"createProject"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+      <span class="hljs-attr">"id"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"4"</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">"product_id"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">"product_name"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">"app_id"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">"api_key"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">"backend_app_id"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">"app_certificate"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">"primary_color"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">"frontend_endpoint"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">"backend_endpoint"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">"pstn"</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">"precall"</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">"primary_logo"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">"primary_square_logo"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">"primary_background_logo"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">"chat"</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">"project_template"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"MEETING"</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">"cloud_recording"</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">"screen_sharing"</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">"encryption_enabled"</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">"landing_sub_heading"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">"primary_font_color"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">"secondary_font_color"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">"sentry_dsn"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">"enable_google_oauth"</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">"enable_apple_oauth"</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">"enable_slack_oauth"</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">"enable_microsoft_oauth"</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">"google_client_id"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">"google_client_secret"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">"microsoft_client_id"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">"microsoft_client_secret"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">"slack_client_id"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">"slack_client_secret"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">"apple_client_id"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">"apple_private_key"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">"apple_key_id"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">"apple_team_id"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">"customer_id"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">"customer_certificate"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">"bucket_name"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">"recording_region"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">987</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">"bucket_access_key"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">"bucket_access_secret"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">"pstn_email"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">"pstn_password"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">"pstn_account"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">"video_profile"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">"frontend_deploy_status"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"SUCCESS"</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">"backend_deploy_status"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"SUCCESS"</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">"created_at"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"10:15:30Z"</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">"updated_at"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"10:15:30Z"</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">"log_enabled"</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">"geo_fencing"</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">"event_mode"</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">"raise_hand"</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span>
     <span class="hljs-punctuation">}</span>
   <span class="hljs-punctuation">}</span>
 <span class="hljs-punctuation">}</span>
@@ -467,17 +977,17 @@
               </div>
             </div>
           </section>
-          <section id="mutation-logoutSession" class="operation operation-mutation" data-traverse-target="mutation-logoutSession">
+          <section id="mutation-generateApiKey" class="operation operation-mutation" data-traverse-target="mutation-generateApiKey">
             <div class="operation-group-name">
               <a href="#group-Operations-Mutations">Mutations</a>
             </div>
-            <h2 class="operation-heading "> <code>logoutSession</code> </h2>
+            <h2 class="operation-heading "> <code>generateApiKey</code> </h2>
             <div class="doc-row">
               <div class="doc-copy">
                 <div class="operation-response doc-copy-section">
                   <h5>Response</h5>
-                  <p> Returns
-                    <a href="#definition-String"><code>[String!]</code></a>
+                  <p> Returns a
+                    <a href="#definition-ProjectApikey"><code>ProjectApikey!</code></a>
                   </p>
                 </div>
                 <div class="operation-arguments doc-copy-section">
@@ -492,9 +1002,9 @@
                     <tbody>
                       <tr>
                         <td>
-                          <span class="property-name"><code>token</code></span> -
+                          <span class="property-name"><code>project_id</code></span> -
                           <span class="property-type">
-                            <a href="#definition-String"><code>String!</code></a>
+                            <a href="#definition-ID"><code>ID!</code></a>
                           </span>
                         </td>
                         <td> </td>
@@ -509,103 +1019,10 @@
                   <h5>Query</h5>
                   <html>
                   <head></head>
-                  <body><pre><code class="hljs language-gql"><span class="hljs-symbol"><span class="hljs-keyword">mutation</span> logoutSession<span class="hljs-tag">(<span class="hljs-code">$token</span>:<span class="hljs-type"> String!</span>)</span> <span class="hljs-tag">{
-  <span class="hljs-symbol">logoutSession<span class="hljs-tag">(token: <span class="hljs-code">$token</span>)</span></span>
-}</span></span>
-</code></pre> </body>
-                  </html>
-                </div>
-                <div class="example-section example-section-is-code operation-variables-example">
-                  <h5>Variables</h5>
-                  <html>
-                  <head></head>
-                  <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span><span class="hljs-attr">"token"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">}</span>
-</code></pre> </body>
-                  </html>
-                </div>
-                <div class="example-section example-section-is-code operation-response-example">
-                  <h5>Response</h5>
-                  <html>
-                  <head></head>
-                  <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span><span class="hljs-attr">"data"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span><span class="hljs-attr">"logoutSession"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">"abc123"</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">}</span><span class="hljs-punctuation">}</span>
-</code></pre> </body>
-                  </html>
-                </div>
-              </div>
-            </div>
-          </section>
-          <section id="mutation-mutePSTN" class="operation operation-mutation" data-traverse-target="mutation-mutePSTN">
-            <div class="operation-group-name">
-              <a href="#group-Operations-Mutations">Mutations</a>
-            </div>
-            <h2 class="operation-heading "> <code>mutePSTN</code> </h2>
-            <div class="doc-row">
-              <div class="doc-copy">
-                <div class="operation-response doc-copy-section">
-                  <h5>Response</h5>
-                  <p> Returns an
-                    <a href="#definition-UIDMuteState"><code>UIDMuteState!</code></a>
-                  </p>
-                </div>
-                <div class="operation-arguments doc-copy-section">
-                  <h5>Arguments</h5>
-                  <table>
-                    <thead>
-                      <tr>
-                        <th>Name</th>
-                        <th>Description</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>
-                          <span class="property-name"><code>uid</code></span> -
-                          <span class="property-type">
-                            <a href="#definition-Int"><code>Int!</code></a>
-                          </span>
-                        </td>
-                        <td> </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <span class="property-name"><code>passphrase</code></span> -
-                          <span class="property-type">
-                            <a href="#definition-String"><code>String!</code></a>
-                          </span>
-                        </td>
-                        <td> </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <span class="property-name"><code>mute</code></span> -
-                          <span class="property-type">
-                            <a href="#definition-Boolean"><code>Boolean</code></a>
-                          </span>
-                        </td>
-                        <td> Default = <code>true</code> </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-              <div class="doc-examples">
-                <h4 class="example-heading">Example</h4>
-                <div class="example-section example-section-is-code operation-query-example">
-                  <h5>Query</h5>
-                  <html>
-                  <head></head>
-                  <body><pre><code class="hljs language-gql"><span class="hljs-symbol"><span class="hljs-keyword">mutation</span> mutePSTN<span class="hljs-tag">(
-  <span class="hljs-code">$uid</span>:<span class="hljs-type"> Int!</span>,
-  <span class="hljs-code">$passphrase</span>:<span class="hljs-type"> String!</span>,
-  <span class="hljs-code">$mute</span>:<span class="hljs-type"> Boolean
-</span>)</span> <span class="hljs-tag">{
-  <span class="hljs-symbol">mutePSTN<span class="hljs-tag">(
-    uid: <span class="hljs-code">$uid</span>,
-    passphrase: <span class="hljs-code">$passphrase</span>,
-    mute: <span class="hljs-code">$mute</span>
-  )</span> <span class="hljs-tag">{
-    <span class="hljs-symbol">uid</span>
-    <span class="hljs-symbol">mute</span>
+                  <body><pre><code class="hljs language-gql"><span class="hljs-symbol"><span class="hljs-keyword">mutation</span> generateApiKey<span class="hljs-tag">(<span class="hljs-code">$project_id</span>: ID!)</span> <span class="hljs-tag">{
+  <span class="hljs-symbol">generateApiKey<span class="hljs-tag">(project_id: <span class="hljs-code">$project_id</span>)</span> <span class="hljs-tag">{
+    <span class="hljs-symbol">project_id</span>
+    <span class="hljs-symbol">api_key</span>
   }</span></span>
 }</span></span>
 </code></pre> </body>
@@ -615,245 +1032,7 @@
                   <h5>Variables</h5>
                   <html>
                   <head></head>
-                  <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
-  <span class="hljs-attr">"uid"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">123</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"passphrase"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"mute"</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span>
-<span class="hljs-punctuation">}</span>
-</code></pre> </body>
-                  </html>
-                </div>
-                <div class="example-section example-section-is-code operation-response-example">
-                  <h5>Response</h5>
-                  <html>
-                  <head></head>
-                  <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span><span class="hljs-attr">"data"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span><span class="hljs-attr">"mutePSTN"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span><span class="hljs-attr">"uid"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">123</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">"mute"</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span><span class="hljs-punctuation">}</span><span class="hljs-punctuation">}</span><span class="hljs-punctuation">}</span>
-</code></pre> </body>
-                  </html>
-                </div>
-              </div>
-            </div>
-          </section>
-          <section id="mutation-setNormal" class="operation operation-mutation" data-traverse-target="mutation-setNormal">
-            <div class="operation-group-name">
-              <a href="#group-Operations-Mutations">Mutations</a>
-            </div>
-            <h2 class="operation-heading "> <code>setNormal</code> </h2>
-            <div class="doc-row">
-              <div class="doc-copy">
-                <div class="operation-response doc-copy-section">
-                  <h5>Response</h5>
-                  <p> Returns a
-                    <a href="#definition-String"><code>String!</code></a>
-                  </p>
-                </div>
-                <div class="operation-arguments doc-copy-section">
-                  <h5>Arguments</h5>
-                  <table>
-                    <thead>
-                      <tr>
-                        <th>Name</th>
-                        <th>Description</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>
-                          <span class="property-name"><code>passphrase</code></span> -
-                          <span class="property-type">
-                            <a href="#definition-String"><code>String!</code></a>
-                          </span>
-                        </td>
-                        <td> </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-              <div class="doc-examples">
-                <h4 class="example-heading">Example</h4>
-                <div class="example-section example-section-is-code operation-query-example">
-                  <h5>Query</h5>
-                  <html>
-                  <head></head>
-                  <body><pre><code class="hljs language-gql"><span class="hljs-symbol"><span class="hljs-keyword">mutation</span> setNormal<span class="hljs-tag">(<span class="hljs-code">$passphrase</span>:<span class="hljs-type"> String!</span>)</span> <span class="hljs-tag">{
-  <span class="hljs-symbol">setNormal<span class="hljs-tag">(passphrase: <span class="hljs-code">$passphrase</span>)</span></span>
-}</span></span>
-</code></pre> </body>
-                  </html>
-                </div>
-                <div class="example-section example-section-is-code operation-variables-example">
-                  <h5>Variables</h5>
-                  <html>
-                  <head></head>
-                  <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span><span class="hljs-attr">"passphrase"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">}</span>
-</code></pre> </body>
-                  </html>
-                </div>
-                <div class="example-section example-section-is-code operation-response-example">
-                  <h5>Response</h5>
-                  <html>
-                  <head></head>
-                  <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span><span class="hljs-attr">"data"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span><span class="hljs-attr">"setNormal"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">}</span><span class="hljs-punctuation">}</span>
-</code></pre> </body>
-                  </html>
-                </div>
-              </div>
-            </div>
-          </section>
-          <section id="mutation-setPresenter" class="operation operation-mutation" data-traverse-target="mutation-setPresenter">
-            <div class="operation-group-name">
-              <a href="#group-Operations-Mutations">Mutations</a>
-            </div>
-            <h2 class="operation-heading "> <code>setPresenter</code> </h2>
-            <div class="doc-row">
-              <div class="doc-copy">
-                <div class="operation-response doc-copy-section">
-                  <h5>Response</h5>
-                  <p> Returns an
-                    <a href="#definition-Int"><code>Int!</code></a>
-                  </p>
-                </div>
-                <div class="operation-arguments doc-copy-section">
-                  <h5>Arguments</h5>
-                  <table>
-                    <thead>
-                      <tr>
-                        <th>Name</th>
-                        <th>Description</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>
-                          <span class="property-name"><code>uid</code></span> -
-                          <span class="property-type">
-                            <a href="#definition-Int"><code>Int!</code></a>
-                          </span>
-                        </td>
-                        <td> </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <span class="property-name"><code>passphrase</code></span> -
-                          <span class="property-type">
-                            <a href="#definition-String"><code>String!</code></a>
-                          </span>
-                        </td>
-                        <td> </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-              <div class="doc-examples">
-                <h4 class="example-heading">Example</h4>
-                <div class="example-section example-section-is-code operation-query-example">
-                  <h5>Query</h5>
-                  <html>
-                  <head></head>
-                  <body><pre><code class="hljs language-gql"><span class="hljs-symbol"><span class="hljs-keyword">mutation</span> setPresenter<span class="hljs-tag">(
-  <span class="hljs-code">$uid</span>:<span class="hljs-type"> Int!</span>,
-  <span class="hljs-code">$passphrase</span>:<span class="hljs-type"> String!</span>
-)</span> <span class="hljs-tag">{
-  <span class="hljs-symbol">setPresenter<span class="hljs-tag">(
-    uid: <span class="hljs-code">$uid</span>,
-    passphrase: <span class="hljs-code">$passphrase</span>
-  )</span></span>
-}</span></span>
-</code></pre> </body>
-                  </html>
-                </div>
-                <div class="example-section example-section-is-code operation-variables-example">
-                  <h5>Variables</h5>
-                  <html>
-                  <head></head>
-                  <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span><span class="hljs-attr">"uid"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">987</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">"passphrase"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">}</span>
-</code></pre> </body>
-                  </html>
-                </div>
-                <div class="example-section example-section-is-code operation-response-example">
-                  <h5>Response</h5>
-                  <html>
-                  <head></head>
-                  <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span><span class="hljs-attr">"data"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span><span class="hljs-attr">"setPresenter"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">123</span><span class="hljs-punctuation">}</span><span class="hljs-punctuation">}</span>
-</code></pre> </body>
-                  </html>
-                </div>
-              </div>
-            </div>
-          </section>
-          <section id="mutation-startRecordingSession" class="operation operation-mutation" data-traverse-target="mutation-startRecordingSession">
-            <div class="operation-group-name">
-              <a href="#group-Operations-Mutations">Mutations</a>
-            </div>
-            <h2 class="operation-heading "> <code>startRecordingSession</code> </h2>
-            <div class="doc-row">
-              <div class="doc-copy">
-                <div class="operation-response doc-copy-section">
-                  <h5>Response</h5>
-                  <p> Returns a
-                    <a href="#definition-String"><code>String!</code></a>
-                  </p>
-                </div>
-                <div class="operation-arguments doc-copy-section">
-                  <h5>Arguments</h5>
-                  <table>
-                    <thead>
-                      <tr>
-                        <th>Name</th>
-                        <th>Description</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>
-                          <span class="property-name"><code>passphrase</code></span> -
-                          <span class="property-type">
-                            <a href="#definition-String"><code>String!</code></a>
-                          </span>
-                        </td>
-                        <td> </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <span class="property-name"><code>secret</code></span> -
-                          <span class="property-type">
-                            <a href="#definition-String"><code>String</code></a>
-                          </span>
-                        </td>
-                        <td> </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-              <div class="doc-examples">
-                <h4 class="example-heading">Example</h4>
-                <div class="example-section example-section-is-code operation-query-example">
-                  <h5>Query</h5>
-                  <html>
-                  <head></head>
-                  <body><pre><code class="hljs language-gql"><span class="hljs-symbol"><span class="hljs-keyword">mutation</span> startRecordingSession<span class="hljs-tag">(
-  <span class="hljs-code">$passphrase</span>:<span class="hljs-type"> String!</span>,
-  <span class="hljs-code">$secret</span>:<span class="hljs-type"> String
-</span>)</span> <span class="hljs-tag">{
-  <span class="hljs-symbol">startRecordingSession<span class="hljs-tag">(
-    passphrase: <span class="hljs-code">$passphrase</span>,
-    secret: <span class="hljs-code">$secret</span>
-  )</span></span>
-}</span></span>
-</code></pre> </body>
-                  </html>
-                </div>
-                <div class="example-section example-section-is-code operation-variables-example">
-                  <h5>Variables</h5>
-                  <html>
-                  <head></head>
-                  <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
-  <span class="hljs-attr">"passphrase"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"secret"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span>
-<span class="hljs-punctuation">}</span>
+                  <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span><span class="hljs-attr">"project_id"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">4</span><span class="hljs-punctuation">}</span>
 </code></pre> </body>
                   </html>
                 </div>
@@ -863,7 +1042,10 @@
                   <head></head>
                   <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">"data"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
-    <span class="hljs-attr">"startRecordingSession"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span>
+    <span class="hljs-attr">"generateApiKey"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+      <span class="hljs-attr">"project_id"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">"api_key"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span>
+    <span class="hljs-punctuation">}</span>
   <span class="hljs-punctuation">}</span>
 <span class="hljs-punctuation">}</span>
 </code></pre> </body>
@@ -872,17 +1054,17 @@
               </div>
             </div>
           </section>
-          <section id="mutation-stopRecordingSession" class="operation operation-mutation" data-traverse-target="mutation-stopRecordingSession">
+          <section id="mutation-publishToHeroku" class="operation operation-mutation" data-traverse-target="mutation-publishToHeroku">
             <div class="operation-group-name">
               <a href="#group-Operations-Mutations">Mutations</a>
             </div>
-            <h2 class="operation-heading "> <code>stopRecordingSession</code> </h2>
+            <h2 class="operation-heading "> <code>publishToHeroku</code> </h2>
             <div class="doc-row">
               <div class="doc-copy">
                 <div class="operation-response doc-copy-section">
                   <h5>Response</h5>
                   <p> Returns a
-                    <a href="#definition-String"><code>String!</code></a>
+                    <a href="#definition-HerokuStatus"><code>HerokuStatus!</code></a>
                   </p>
                 </div>
                 <div class="operation-arguments doc-copy-section">
@@ -897,9 +1079,9 @@
                     <tbody>
                       <tr>
                         <td>
-                          <span class="property-name"><code>passphrase</code></span> -
+                          <span class="property-name"><code>project_id</code></span> -
                           <span class="property-type">
-                            <a href="#definition-String"><code>String!</code></a>
+                            <a href="#definition-ID"><code>ID!</code></a>
                           </span>
                         </td>
                         <td> </td>
@@ -914,77 +1096,12 @@
                   <h5>Query</h5>
                   <html>
                   <head></head>
-                  <body><pre><code class="hljs language-gql"><span class="hljs-symbol"><span class="hljs-keyword">mutation</span> stopRecordingSession<span class="hljs-tag">(<span class="hljs-code">$passphrase</span>:<span class="hljs-type"> String!</span>)</span> <span class="hljs-tag">{
-  <span class="hljs-symbol">stopRecordingSession<span class="hljs-tag">(passphrase: <span class="hljs-code">$passphrase</span>)</span></span>
-}</span></span>
-</code></pre> </body>
-                  </html>
-                </div>
-                <div class="example-section example-section-is-code operation-variables-example">
-                  <h5>Variables</h5>
-                  <html>
-                  <head></head>
-                  <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span><span class="hljs-attr">"passphrase"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">}</span>
-</code></pre> </body>
-                  </html>
-                </div>
-                <div class="example-section example-section-is-code operation-response-example">
-                  <h5>Response</h5>
-                  <html>
-                  <head></head>
-                  <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span><span class="hljs-attr">"data"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span><span class="hljs-attr">"stopRecordingSession"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">}</span><span class="hljs-punctuation">}</span>
-</code></pre> </body>
-                  </html>
-                </div>
-              </div>
-            </div>
-          </section>
-          <section id="mutation-updateUserName" class="operation operation-mutation" data-traverse-target="mutation-updateUserName">
-            <div class="operation-group-name">
-              <a href="#group-Operations-Mutations">Mutations</a>
-            </div>
-            <h2 class="operation-heading "> <code>updateUserName</code> </h2>
-            <div class="doc-row">
-              <div class="doc-copy">
-                <div class="operation-response doc-copy-section">
-                  <h5>Response</h5>
-                  <p> Returns a
-                    <a href="#definition-User"><code>User!</code></a>
-                  </p>
-                </div>
-                <div class="operation-arguments doc-copy-section">
-                  <h5>Arguments</h5>
-                  <table>
-                    <thead>
-                      <tr>
-                        <th>Name</th>
-                        <th>Description</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>
-                          <span class="property-name"><code>name</code></span> -
-                          <span class="property-type">
-                            <a href="#definition-String"><code>String!</code></a>
-                          </span>
-                        </td>
-                        <td> </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-              <div class="doc-examples">
-                <h4 class="example-heading">Example</h4>
-                <div class="example-section example-section-is-code operation-query-example">
-                  <h5>Query</h5>
-                  <html>
-                  <head></head>
-                  <body><pre><code class="hljs language-gql"><span class="hljs-symbol"><span class="hljs-keyword">mutation</span> updateUserName<span class="hljs-tag">(<span class="hljs-code">$name</span>:<span class="hljs-type"> String!</span>)</span> <span class="hljs-tag">{
-  <span class="hljs-symbol">updateUserName<span class="hljs-tag">(name: <span class="hljs-code">$name</span>)</span> <span class="hljs-tag">{
-    <span class="hljs-symbol">name</span>
-    <span class="hljs-symbol">email</span>
+                  <body><pre><code class="hljs language-gql"><span class="hljs-symbol"><span class="hljs-keyword">mutation</span> publishToHeroku<span class="hljs-tag">(<span class="hljs-code">$project_id</span>: ID!)</span> <span class="hljs-tag">{
+  <span class="hljs-symbol">publishToHeroku<span class="hljs-tag">(project_id: <span class="hljs-code">$project_id</span>)</span> <span class="hljs-tag">{
+    <span class="hljs-symbol">status</span>
+    <span class="hljs-symbol">message</span>
+    <span class="hljs-symbol">url</span>
+    <span class="hljs-symbol">appname</span>
   }</span></span>
 }</span></span>
 </code></pre> </body>
@@ -994,7 +1111,7 @@
                   <h5>Variables</h5>
                   <html>
                   <head></head>
-                  <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span><span class="hljs-attr">"name"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">}</span>
+                  <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span><span class="hljs-attr">"project_id"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"4"</span><span class="hljs-punctuation">}</span>
 </code></pre> </body>
                   </html>
                 </div>
@@ -1004,9 +1121,92 @@
                   <head></head>
                   <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">"data"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
-    <span class="hljs-attr">"updateUserName"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
-      <span class="hljs-attr">"name"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
-      <span class="hljs-attr">"email"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span>
+    <span class="hljs-attr">"publishToHeroku"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+      <span class="hljs-attr">"status"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"SUCCESS"</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">"message"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">"url"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">"appname"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span>
+    <span class="hljs-punctuation">}</span>
+  <span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">}</span>
+</code></pre> </body>
+                  </html>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section id="mutation-publishToVercel" class="operation operation-mutation" data-traverse-target="mutation-publishToVercel">
+            <div class="operation-group-name">
+              <a href="#group-Operations-Mutations">Mutations</a>
+            </div>
+            <h2 class="operation-heading "> <code>publishToVercel</code> </h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <div class="operation-response doc-copy-section">
+                  <h5>Response</h5>
+                  <p> Returns a
+                    <a href="#definition-VercelStatus"><code>VercelStatus!</code></a>
+                  </p>
+                </div>
+                <div class="operation-arguments doc-copy-section">
+                  <h5>Arguments</h5>
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <span class="property-name"><code>project_id</code></span> -
+                          <span class="property-type">
+                            <a href="#definition-ID"><code>ID!</code></a>
+                          </span>
+                        </td>
+                        <td> </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="doc-examples">
+                <h4 class="example-heading">Example</h4>
+                <div class="example-section example-section-is-code operation-query-example">
+                  <h5>Query</h5>
+                  <html>
+                  <head></head>
+                  <body><pre><code class="hljs language-gql"><span class="hljs-symbol"><span class="hljs-keyword">mutation</span> publishToVercel<span class="hljs-tag">(<span class="hljs-code">$project_id</span>: ID!)</span> <span class="hljs-tag">{
+  <span class="hljs-symbol">publishToVercel<span class="hljs-tag">(project_id: <span class="hljs-code">$project_id</span>)</span> <span class="hljs-tag">{
+    <span class="hljs-symbol">status</span>
+    <span class="hljs-symbol">message</span>
+    <span class="hljs-symbol">url</span>
+    <span class="hljs-symbol">appname</span>
+  }</span></span>
+}</span></span>
+</code></pre> </body>
+                  </html>
+                </div>
+                <div class="example-section example-section-is-code operation-variables-example">
+                  <h5>Variables</h5>
+                  <html>
+                  <head></head>
+                  <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span><span class="hljs-attr">"project_id"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"4"</span><span class="hljs-punctuation">}</span>
+</code></pre> </body>
+                  </html>
+                </div>
+                <div class="example-section example-section-is-code operation-response-example">
+                  <h5>Response</h5>
+                  <html>
+                  <head></head>
+                  <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">"data"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">"publishToVercel"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+      <span class="hljs-attr">"status"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"SUCCESS"</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">"message"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">"url"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">"appname"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span>
     <span class="hljs-punctuation">}</span>
   <span class="hljs-punctuation">}</span>
 <span class="hljs-punctuation">}</span>
@@ -1026,12 +1226,285 @@
                   <p>The <code>Boolean</code> scalar type represents <code>true</code> or <code>false</code>.</p>
                 </div>
               </div>
+              <div class="doc-examples"> </div>
+            </div>
+          </section>
+          <section id="definition-DeployStatus" class="definition definition-enum" data-traverse-target="definition-DeployStatus">
+            <div class="definition-group-name">
+              <a href="#group-Types">Types</a>
+            </div>
+            <h2 class="definition-heading">DeployStatus</h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <div class="definition-properties doc-copy-section">
+                  <h5>Values</h5>
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Enum Value</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <p><code>SUCCESS</code></p>
+                        </td>
+                        <td> </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <p><code>PENDING</code></p>
+                        </td>
+                        <td> </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <p><code>FAILURE</code></p>
+                        </td>
+                        <td> </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <p><code>NONE</code></p>
+                        </td>
+                        <td> </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
               <div class="doc-examples">
                 <div class="example-section example-section-is-code">
                   <h5>Example</h5>
                   <html>
                   <head></head>
-                  <body><pre><code class="hljs language-json"><span class="hljs-literal"><span class="hljs-keyword">true</span></span>
+                  <body><pre><code class="hljs language-gql"><span class="hljs-symbol">"SUCCESS"</span>
+</code></pre> </body>
+                  </html>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section id="definition-FrontendArtifacts" class="definition definition-object" data-traverse-target="definition-FrontendArtifacts">
+            <div class="definition-group-name">
+              <a href="#group-Types">Types</a>
+            </div>
+            <h2 class="definition-heading">FrontendArtifacts</h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <div class="definition-properties doc-copy-section">
+                  <h5>Fields</h5>
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Field Name</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td data-property-name="">
+                          <span class="property-name"><code>turnkey</code></span> -
+                          <span class="property-type">
+                            <a href="#definition-String"><code>[String!]</code></a>
+                          </span>
+                        </td>
+                        <td> </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name="">
+                          <span class="property-name"><code>reactsdk</code></span> -
+                          <span class="property-type">
+                            <a href="#definition-String"><code>[String!]</code></a>
+                          </span>
+                        </td>
+                        <td> </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name="">
+                          <span class="property-name"><code>websdk</code></span> -
+                          <span class="property-type">
+                            <a href="#definition-String"><code>[String!]</code></a>
+                          </span>
+                        </td>
+                        <td> </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="doc-examples">
+                <div class="example-section example-section-is-code">
+                  <h5>Example</h5>
+                  <html>
+                  <head></head>
+                  <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">"turnkey"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"reactsdk"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"websdk"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">"abc123"</span><span class="hljs-punctuation">]</span>
+<span class="hljs-punctuation">}</span>
+</code></pre> </body>
+                  </html>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section id="definition-FrontendBuildType" class="definition definition-enum" data-traverse-target="definition-FrontendBuildType">
+            <div class="definition-group-name">
+              <a href="#group-Types">Types</a>
+            </div>
+            <h2 class="definition-heading">FrontendBuildType</h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <div class="definition-properties doc-copy-section">
+                  <h5>Values</h5>
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Enum Value</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <p><code>TURNKEY</code></p>
+                        </td>
+                        <td> </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <p><code>REACTSDK</code></p>
+                        </td>
+                        <td> </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <p><code>REACTSDKESBUILD</code></p>
+                        </td>
+                        <td> </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <p><code>REACTSDKESBUILDGO</code></p>
+                        </td>
+                        <td> </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <p><code>WEBSDK</code></p>
+                        </td>
+                        <td> </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="doc-examples">
+                <div class="example-section example-section-is-code">
+                  <h5>Example</h5>
+                  <html>
+                  <head></head>
+                  <body><pre><code class="hljs language-gql"><span class="hljs-symbol">"TURNKEY"</span>
+</code></pre> </body>
+                  </html>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section id="definition-HerokuStatus" class="definition definition-object" data-traverse-target="definition-HerokuStatus">
+            <div class="definition-group-name">
+              <a href="#group-Types">Types</a>
+            </div>
+            <h2 class="definition-heading">HerokuStatus</h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <div class="definition-properties doc-copy-section">
+                  <h5>Fields</h5>
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Field Name</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td data-property-name="">
+                          <span class="property-name"><code>status</code></span> -
+                          <span class="property-type">
+                            <a href="#definition-DeployStatus"><code>DeployStatus!</code></a>
+                          </span>
+                        </td>
+                        <td> </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name="">
+                          <span class="property-name"><code>message</code></span> -
+                          <span class="property-type">
+                            <a href="#definition-String"><code>String!</code></a>
+                          </span>
+                        </td>
+                        <td> </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name="">
+                          <span class="property-name"><code>url</code></span> -
+                          <span class="property-type">
+                            <a href="#definition-String"><code>String!</code></a>
+                          </span>
+                        </td>
+                        <td> </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name="">
+                          <span class="property-name"><code>appname</code></span> -
+                          <span class="property-type">
+                            <a href="#definition-String"><code>String!</code></a>
+                          </span>
+                        </td>
+                        <td> </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="doc-examples">
+                <div class="example-section example-section-is-code">
+                  <h5>Example</h5>
+                  <html>
+                  <head></head>
+                  <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">"status"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"SUCCESS"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"message"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"url"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"appname"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span>
+<span class="hljs-punctuation">}</span>
+</code></pre> </body>
+                  </html>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section id="definition-ID" class="definition definition-scalar" data-traverse-target="definition-ID">
+            <div class="definition-group-name">
+              <a href="#group-Types">Types</a>
+            </div>
+            <h2 class="definition-heading">ID</h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <div class="definition-description doc-copy-section">
+                  <h5>Description</h5>
+                  <p>The <code>ID</code> scalar type represents a unique identifier, often used to refetch an object or as key for a cache. The ID type appears in a JSON response as a String; however, it is not intended to be human-readable. When expected as an input type, any string (such as <code>&quot;4&quot;</code>) or integer (such as <code>4</code>) input value will be accepted as an ID.</p>
+                </div>
+              </div>
+              <div class="doc-examples">
+                <div class="example-section example-section-is-code">
+                  <h5>Example</h5>
+                  <html>
+                  <head></head>
+                  <body><pre><code class="hljs language-gql"><span class="hljs-symbol">"4"</span>
 </code></pre> </body>
                   </html>
                 </div>
@@ -1062,11 +1535,11 @@
               </div>
             </div>
           </section>
-          <section id="definition-PSTN" class="definition definition-object" data-traverse-target="definition-PSTN">
+          <section id="definition-Project" class="definition definition-object" data-traverse-target="definition-Project">
             <div class="definition-group-name">
               <a href="#group-Types">Types</a>
             </div>
-            <h2 class="definition-heading">PSTN</h2>
+            <h2 class="definition-heading">Project</h2>
             <div class="doc-row">
               <div class="doc-copy">
                 <div class="definition-properties doc-copy-section">
@@ -1081,7 +1554,16 @@
                     <tbody>
                       <tr>
                         <td data-property-name="">
-                          <span class="property-name"><code>number</code></span> -
+                          <span class="property-name"><code>id</code></span> -
+                          <span class="property-type">
+                            <a href="#definition-ID"><code>ID!</code></a>
+                          </span>
+                        </td>
+                        <td> </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name="">
+                          <span class="property-name"><code>product_id</code></span> -
                           <span class="property-type">
                             <a href="#definition-String"><code>String!</code></a>
                           </span>
@@ -1090,106 +1572,7 @@
                       </tr>
                       <tr>
                         <td data-property-name="">
-                          <span class="property-name"><code>dtmf</code></span> -
-                          <span class="property-type">
-                            <a href="#definition-String"><code>String!</code></a>
-                          </span>
-                        </td>
-                        <td> </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-              <div class="doc-examples">
-                <div class="example-section example-section-is-code">
-                  <h5>Example</h5>
-                  <html>
-                  <head></head>
-                  <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
-  <span class="hljs-attr">"number"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"dtmf"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span>
-<span class="hljs-punctuation">}</span>
-</code></pre> </body>
-                  </html>
-                </div>
-              </div>
-            </div>
-          </section>
-          <section id="definition-Passphrase" class="definition definition-object" data-traverse-target="definition-Passphrase">
-            <div class="definition-group-name">
-              <a href="#group-Types">Types</a>
-            </div>
-            <h2 class="definition-heading">Passphrase</h2>
-            <div class="doc-row">
-              <div class="doc-copy">
-                <div class="definition-properties doc-copy-section">
-                  <h5>Fields</h5>
-                  <table>
-                    <thead>
-                      <tr>
-                        <th>Field Name</th>
-                        <th>Description</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td data-property-name="">
-                          <span class="property-name"><code>host</code></span> -
-                          <span class="property-type">
-                            <a href="#definition-String"><code>String</code></a>
-                          </span>
-                        </td>
-                        <td> </td>
-                      </tr>
-                      <tr>
-                        <td data-property-name="">
-                          <span class="property-name"><code>view</code></span> -
-                          <span class="property-type">
-                            <a href="#definition-String"><code>String!</code></a>
-                          </span>
-                        </td>
-                        <td> </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-              <div class="doc-examples">
-                <div class="example-section example-section-is-code">
-                  <h5>Example</h5>
-                  <html>
-                  <head></head>
-                  <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
-  <span class="hljs-attr">"host"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"view"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span>
-<span class="hljs-punctuation">}</span>
-</code></pre> </body>
-                  </html>
-                </div>
-              </div>
-            </div>
-          </section>
-          <section id="definition-Session" class="definition definition-object" data-traverse-target="definition-Session">
-            <div class="definition-group-name">
-              <a href="#group-Types">Types</a>
-            </div>
-            <h2 class="definition-heading">Session</h2>
-            <div class="doc-row">
-              <div class="doc-copy">
-                <div class="definition-properties doc-copy-section">
-                  <h5>Fields</h5>
-                  <table>
-                    <thead>
-                      <tr>
-                        <th>Field Name</th>
-                        <th>Description</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td data-property-name="">
-                          <span class="property-name"><code>channel</code></span> -
+                          <span class="property-name"><code>product_name</code></span> -
                           <span class="property-type">
                             <a href="#definition-String"><code>String!</code></a>
                           </span>
@@ -1198,7 +1581,7 @@
                       </tr>
                       <tr>
                         <td data-property-name="">
-                          <span class="property-name"><code>title</code></span> -
+                          <span class="property-name"><code>app_id</code></span> -
                           <span class="property-type">
                             <a href="#definition-String"><code>String!</code></a>
                           </span>
@@ -1207,16 +1590,7 @@
                       </tr>
                       <tr>
                         <td data-property-name="">
-                          <span class="property-name"><code>isHost</code></span> -
-                          <span class="property-type">
-                            <a href="#definition-Boolean"><code>Boolean!</code></a>
-                          </span>
-                        </td>
-                        <td> </td>
-                      </tr>
-                      <tr>
-                        <td data-property-name="">
-                          <span class="property-name"><code>secret</code></span> -
+                          <span class="property-name"><code>api_key</code></span> -
                           <span class="property-type">
                             <a href="#definition-String"><code>String!</code></a>
                           </span>
@@ -1225,74 +1599,7 @@
                       </tr>
                       <tr>
                         <td data-property-name="">
-                          <span class="property-name"><code>mainUser</code></span> -
-                          <span class="property-type">
-                            <a href="#definition-UserCredentials"><code>UserCredentials!</code></a>
-                          </span>
-                        </td>
-                        <td> </td>
-                      </tr>
-                      <tr>
-                        <td data-property-name="">
-                          <span class="property-name"><code>screenShare</code></span> -
-                          <span class="property-type">
-                            <a href="#definition-UserCredentials"><code>UserCredentials!</code></a>
-                          </span>
-                        </td>
-                        <td> </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-              <div class="doc-examples">
-                <div class="example-section example-section-is-code">
-                  <h5>Example</h5>
-                  <html>
-                  <head></head>
-                  <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
-  <span class="hljs-attr">"channel"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"title"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"isHost"</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"secret"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"mainUser"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">UserCredentials</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"screenShare"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">UserCredentials</span>
-<span class="hljs-punctuation">}</span>
-</code></pre> </body>
-                  </html>
-                </div>
-              </div>
-            </div>
-          </section>
-          <section id="definition-ShareResponse" class="definition definition-object" data-traverse-target="definition-ShareResponse">
-            <div class="definition-group-name">
-              <a href="#group-Types">Types</a>
-            </div>
-            <h2 class="definition-heading">ShareResponse</h2>
-            <div class="doc-row">
-              <div class="doc-copy">
-                <div class="definition-properties doc-copy-section">
-                  <h5>Fields</h5>
-                  <table>
-                    <thead>
-                      <tr>
-                        <th>Field Name</th>
-                        <th>Description</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td data-property-name="">
-                          <span class="property-name"><code>passphrase</code></span> -
-                          <span class="property-type">
-                            <a href="#definition-Passphrase"><code>Passphrase!</code></a>
-                          </span>
-                        </td>
-                        <td> </td>
-                      </tr>
-                      <tr>
-                        <td data-property-name="">
-                          <span class="property-name"><code>channel</code></span> -
+                          <span class="property-name"><code>backend_app_id</code></span> -
                           <span class="property-type">
                             <a href="#definition-String"><code>String!</code></a>
                           </span>
@@ -1301,7 +1608,34 @@
                       </tr>
                       <tr>
                         <td data-property-name="">
-                          <span class="property-name"><code>title</code></span> -
+                          <span class="property-name"><code>app_certificate</code></span> -
+                          <span class="property-type">
+                            <a href="#definition-String"><code>String!</code></a>
+                          </span>
+                        </td>
+                        <td> </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name="">
+                          <span class="property-name"><code>primary_color</code></span> -
+                          <span class="property-type">
+                            <a href="#definition-String"><code>String!</code></a>
+                          </span>
+                        </td>
+                        <td> </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name="">
+                          <span class="property-name"><code>frontend_endpoint</code></span> -
+                          <span class="property-type">
+                            <a href="#definition-String"><code>String!</code></a>
+                          </span>
+                        </td>
+                        <td> </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name="">
+                          <span class="property-name"><code>backend_endpoint</code></span> -
                           <span class="property-type">
                             <a href="#definition-String"><code>String!</code></a>
                           </span>
@@ -1312,7 +1646,412 @@
                         <td data-property-name="">
                           <span class="property-name"><code>pstn</code></span> -
                           <span class="property-type">
-                            <a href="#definition-PSTN"><code>PSTN</code></a>
+                            <a href="#definition-Boolean"><code>Boolean!</code></a>
+                          </span>
+                        </td>
+                        <td> </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name="">
+                          <span class="property-name"><code>precall</code></span> -
+                          <span class="property-type">
+                            <a href="#definition-Boolean"><code>Boolean!</code></a>
+                          </span>
+                        </td>
+                        <td> </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name="">
+                          <span class="property-name"><code>primary_logo</code></span> -
+                          <span class="property-type">
+                            <a href="#definition-String"><code>String!</code></a>
+                          </span>
+                        </td>
+                        <td> </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name="">
+                          <span class="property-name"><code>primary_square_logo</code></span> -
+                          <span class="property-type">
+                            <a href="#definition-String"><code>String!</code></a>
+                          </span>
+                        </td>
+                        <td> </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name="">
+                          <span class="property-name"><code>primary_background_logo</code></span> -
+                          <span class="property-type">
+                            <a href="#definition-String"><code>String!</code></a>
+                          </span>
+                        </td>
+                        <td> </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name="">
+                          <span class="property-name"><code>chat</code></span> -
+                          <span class="property-type">
+                            <a href="#definition-Boolean"><code>Boolean!</code></a>
+                          </span>
+                        </td>
+                        <td> </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name="">
+                          <span class="property-name"><code>project_template</code></span> -
+                          <span class="property-type">
+                            <a href="#definition-ProjectPreset"><code>ProjectPreset!</code></a>
+                          </span>
+                        </td>
+                        <td> </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name="">
+                          <span class="property-name"><code>cloud_recording</code></span> -
+                          <span class="property-type">
+                            <a href="#definition-Boolean"><code>Boolean!</code></a>
+                          </span>
+                        </td>
+                        <td> </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name="">
+                          <span class="property-name"><code>screen_sharing</code></span> -
+                          <span class="property-type">
+                            <a href="#definition-Boolean"><code>Boolean!</code></a>
+                          </span>
+                        </td>
+                        <td> </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name="">
+                          <span class="property-name"><code>encryption_enabled</code></span> -
+                          <span class="property-type">
+                            <a href="#definition-Boolean"><code>Boolean!</code></a>
+                          </span>
+                        </td>
+                        <td> </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name="">
+                          <span class="property-name"><code>landing_sub_heading</code></span> -
+                          <span class="property-type">
+                            <a href="#definition-String"><code>String!</code></a>
+                          </span>
+                        </td>
+                        <td> </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name="">
+                          <span class="property-name"><code>primary_font_color</code></span> -
+                          <span class="property-type">
+                            <a href="#definition-String"><code>String!</code></a>
+                          </span>
+                        </td>
+                        <td> </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name="">
+                          <span class="property-name"><code>secondary_font_color</code></span> -
+                          <span class="property-type">
+                            <a href="#definition-String"><code>String!</code></a>
+                          </span>
+                        </td>
+                        <td> </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name="">
+                          <span class="property-name"><code>sentry_dsn</code></span> -
+                          <span class="property-type">
+                            <a href="#definition-String"><code>String!</code></a>
+                          </span>
+                        </td>
+                        <td> </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name="">
+                          <span class="property-name"><code>enable_google_oauth</code></span> -
+                          <span class="property-type">
+                            <a href="#definition-Boolean"><code>Boolean!</code></a>
+                          </span>
+                        </td>
+                        <td> </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name="">
+                          <span class="property-name"><code>enable_apple_oauth</code></span> -
+                          <span class="property-type">
+                            <a href="#definition-Boolean"><code>Boolean!</code></a>
+                          </span>
+                        </td>
+                        <td> </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name="">
+                          <span class="property-name"><code>enable_slack_oauth</code></span> -
+                          <span class="property-type">
+                            <a href="#definition-Boolean"><code>Boolean!</code></a>
+                          </span>
+                        </td>
+                        <td> </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name="">
+                          <span class="property-name"><code>enable_microsoft_oauth</code></span> -
+                          <span class="property-type">
+                            <a href="#definition-Boolean"><code>Boolean!</code></a>
+                          </span>
+                        </td>
+                        <td> </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name="">
+                          <span class="property-name"><code>google_client_id</code></span> -
+                          <span class="property-type">
+                            <a href="#definition-String"><code>String!</code></a>
+                          </span>
+                        </td>
+                        <td> </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name="">
+                          <span class="property-name"><code>google_client_secret</code></span> -
+                          <span class="property-type">
+                            <a href="#definition-String"><code>String!</code></a>
+                          </span>
+                        </td>
+                        <td> </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name="">
+                          <span class="property-name"><code>microsoft_client_id</code></span> -
+                          <span class="property-type">
+                            <a href="#definition-String"><code>String!</code></a>
+                          </span>
+                        </td>
+                        <td> </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name="">
+                          <span class="property-name"><code>microsoft_client_secret</code></span> -
+                          <span class="property-type">
+                            <a href="#definition-String"><code>String!</code></a>
+                          </span>
+                        </td>
+                        <td> </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name="">
+                          <span class="property-name"><code>slack_client_id</code></span> -
+                          <span class="property-type">
+                            <a href="#definition-String"><code>String!</code></a>
+                          </span>
+                        </td>
+                        <td> </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name="">
+                          <span class="property-name"><code>slack_client_secret</code></span> -
+                          <span class="property-type">
+                            <a href="#definition-String"><code>String!</code></a>
+                          </span>
+                        </td>
+                        <td> </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name="">
+                          <span class="property-name"><code>apple_client_id</code></span> -
+                          <span class="property-type">
+                            <a href="#definition-String"><code>String!</code></a>
+                          </span>
+                        </td>
+                        <td> </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name="">
+                          <span class="property-name"><code>apple_private_key</code></span> -
+                          <span class="property-type">
+                            <a href="#definition-String"><code>String!</code></a>
+                          </span>
+                        </td>
+                        <td> </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name="">
+                          <span class="property-name"><code>apple_key_id</code></span> -
+                          <span class="property-type">
+                            <a href="#definition-String"><code>String!</code></a>
+                          </span>
+                        </td>
+                        <td> </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name="">
+                          <span class="property-name"><code>apple_team_id</code></span> -
+                          <span class="property-type">
+                            <a href="#definition-String"><code>String!</code></a>
+                          </span>
+                        </td>
+                        <td> </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name="">
+                          <span class="property-name"><code>customer_id</code></span> -
+                          <span class="property-type">
+                            <a href="#definition-String"><code>String!</code></a>
+                          </span>
+                        </td>
+                        <td> </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name="">
+                          <span class="property-name"><code>customer_certificate</code></span> -
+                          <span class="property-type">
+                            <a href="#definition-String"><code>String!</code></a>
+                          </span>
+                        </td>
+                        <td> </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name="">
+                          <span class="property-name"><code>bucket_name</code></span> -
+                          <span class="property-type">
+                            <a href="#definition-String"><code>String!</code></a>
+                          </span>
+                        </td>
+                        <td> </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name="">
+                          <span class="property-name"><code>recording_region</code></span> -
+                          <span class="property-type">
+                            <a href="#definition-Int"><code>Int!</code></a>
+                          </span>
+                        </td>
+                        <td> </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name="">
+                          <span class="property-name"><code>bucket_access_key</code></span> -
+                          <span class="property-type">
+                            <a href="#definition-String"><code>String!</code></a>
+                          </span>
+                        </td>
+                        <td> </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name="">
+                          <span class="property-name"><code>bucket_access_secret</code></span> -
+                          <span class="property-type">
+                            <a href="#definition-String"><code>String!</code></a>
+                          </span>
+                        </td>
+                        <td> </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name="">
+                          <span class="property-name"><code>pstn_email</code></span> -
+                          <span class="property-type">
+                            <a href="#definition-String"><code>String!</code></a>
+                          </span>
+                        </td>
+                        <td> </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name="">
+                          <span class="property-name"><code>pstn_password</code></span> -
+                          <span class="property-type">
+                            <a href="#definition-String"><code>String!</code></a>
+                          </span>
+                        </td>
+                        <td> </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name="">
+                          <span class="property-name"><code>pstn_account</code></span> -
+                          <span class="property-type">
+                            <a href="#definition-String"><code>String!</code></a>
+                          </span>
+                        </td>
+                        <td> </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name="">
+                          <span class="property-name"><code>video_profile</code></span> -
+                          <span class="property-type">
+                            <a href="#definition-String"><code>String!</code></a>
+                          </span>
+                        </td>
+                        <td> </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name="">
+                          <span class="property-name"><code>frontend_deploy_status</code></span> -
+                          <span class="property-type">
+                            <a href="#definition-DeployStatus"><code>DeployStatus!</code></a>
+                          </span>
+                        </td>
+                        <td> </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name="">
+                          <span class="property-name"><code>backend_deploy_status</code></span> -
+                          <span class="property-type">
+                            <a href="#definition-DeployStatus"><code>DeployStatus!</code></a>
+                          </span>
+                        </td>
+                        <td> </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name="">
+                          <span class="property-name"><code>created_at</code></span> -
+                          <span class="property-type">
+                            <a href="#definition-Time"><code>Time!</code></a>
+                          </span>
+                        </td>
+                        <td> </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name="">
+                          <span class="property-name"><code>updated_at</code></span> -
+                          <span class="property-type">
+                            <a href="#definition-Time"><code>Time!</code></a>
+                          </span>
+                        </td>
+                        <td> </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name="">
+                          <span class="property-name"><code>log_enabled</code></span> -
+                          <span class="property-type">
+                            <a href="#definition-Boolean"><code>Boolean!</code></a>
+                          </span>
+                        </td>
+                        <td> </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name="">
+                          <span class="property-name"><code>geo_fencing</code></span> -
+                          <span class="property-type">
+                            <a href="#definition-Boolean"><code>Boolean!</code></a>
+                          </span>
+                        </td>
+                        <td> </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name="">
+                          <span class="property-name"><code>event_mode</code></span> -
+                          <span class="property-type">
+                            <a href="#definition-Boolean"><code>Boolean!</code></a>
+                          </span>
+                        </td>
+                        <td> </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name="">
+                          <span class="property-name"><code>raise_hand</code></span> -
+                          <span class="property-type">
+                            <a href="#definition-Boolean"><code>Boolean!</code></a>
                           </span>
                         </td>
                         <td> </td>
@@ -1327,10 +2066,225 @@
                   <html>
                   <head></head>
                   <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
-  <span class="hljs-attr">"passphrase"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">Passphrase</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"channel"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"title"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"pstn"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">PSTN</span>
+  <span class="hljs-attr">"id"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"4"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"product_id"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"product_name"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"app_id"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"api_key"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"backend_app_id"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"app_certificate"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"primary_color"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"frontend_endpoint"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"backend_endpoint"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"pstn"</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"precall"</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"primary_logo"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"primary_square_logo"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"primary_background_logo"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"chat"</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"project_template"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"MEETING"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"cloud_recording"</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"screen_sharing"</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"encryption_enabled"</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"landing_sub_heading"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"primary_font_color"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"secondary_font_color"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"sentry_dsn"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"enable_google_oauth"</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"enable_apple_oauth"</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"enable_slack_oauth"</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"enable_microsoft_oauth"</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"google_client_id"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"google_client_secret"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"microsoft_client_id"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"microsoft_client_secret"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"slack_client_id"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"slack_client_secret"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"apple_client_id"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"apple_private_key"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"apple_key_id"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"apple_team_id"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"customer_id"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"customer_certificate"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"bucket_name"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"recording_region"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">123</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"bucket_access_key"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"bucket_access_secret"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"pstn_email"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"pstn_password"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"pstn_account"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"video_profile"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"frontend_deploy_status"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"SUCCESS"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"backend_deploy_status"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"SUCCESS"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"created_at"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"10:15:30Z"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"updated_at"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"10:15:30Z"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"log_enabled"</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"geo_fencing"</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"event_mode"</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"raise_hand"</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span>
+<span class="hljs-punctuation">}</span>
+</code></pre> </body>
+                  </html>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section id="definition-ProjectApikey" class="definition definition-object" data-traverse-target="definition-ProjectApikey">
+            <div class="definition-group-name">
+              <a href="#group-Types">Types</a>
+            </div>
+            <h2 class="definition-heading">ProjectApikey</h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <div class="definition-properties doc-copy-section">
+                  <h5>Fields</h5>
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Field Name</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td data-property-name="">
+                          <span class="property-name"><code>project_id</code></span> -
+                          <span class="property-type">
+                            <a href="#definition-String"><code>String!</code></a>
+                          </span>
+                        </td>
+                        <td> </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name="">
+                          <span class="property-name"><code>api_key</code></span> -
+                          <span class="property-type">
+                            <a href="#definition-String"><code>String!</code></a>
+                          </span>
+                        </td>
+                        <td> </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="doc-examples">
+                <div class="example-section example-section-is-code">
+                  <h5>Example</h5>
+                  <html>
+                  <head></head>
+                  <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">"project_id"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"api_key"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span>
+<span class="hljs-punctuation">}</span>
+</code></pre> </body>
+                  </html>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section id="definition-ProjectPreset" class="definition definition-enum" data-traverse-target="definition-ProjectPreset">
+            <div class="definition-group-name">
+              <a href="#group-Types">Types</a>
+            </div>
+            <h2 class="definition-heading">ProjectPreset</h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <div class="definition-properties doc-copy-section">
+                  <h5>Values</h5>
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Enum Value</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <p><code>MEETING</code></p>
+                        </td>
+                        <td> </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <p><code>EVENTS</code></p>
+                        </td>
+                        <td> </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="doc-examples">
+                <div class="example-section example-section-is-code">
+                  <h5>Example</h5>
+                  <html>
+                  <head></head>
+                  <body><pre><code class="hljs language-gql"><span class="hljs-symbol">"MEETING"</span>
+</code></pre> </body>
+                  </html>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section id="definition-SourceCodeArchive" class="definition definition-object" data-traverse-target="definition-SourceCodeArchive">
+            <div class="definition-group-name">
+              <a href="#group-Types">Types</a>
+            </div>
+            <h2 class="definition-heading">SourceCodeArchive</h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <div class="definition-properties doc-copy-section">
+                  <h5>Fields</h5>
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Field Name</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td data-property-name="">
+                          <span class="property-name"><code>npm_package</code></span> -
+                          <span class="property-type">
+                            <a href="#definition-String"><code>String!</code></a>
+                          </span>
+                        </td>
+                        <td> </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name="">
+                          <span class="property-name"><code>theme</code></span> -
+                          <span class="property-type">
+                            <a href="#definition-String"><code>String!</code></a>
+                          </span>
+                        </td>
+                        <td> </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name="">
+                          <span class="property-name"><code>config</code></span> -
+                          <span class="property-type">
+                            <a href="#definition-String"><code>String!</code></a>
+                          </span>
+                        </td>
+                        <td> </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="doc-examples">
+                <div class="example-section example-section-is-code">
+                  <h5>Example</h5>
+                  <html>
+                  <head></head>
+                  <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">"npm_package"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"theme"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"config"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span>
 <span class="hljs-punctuation">}</span>
 </code></pre> </body>
                   </html>
@@ -1362,43 +2316,16 @@
               </div>
             </div>
           </section>
-          <section id="definition-UIDMuteState" class="definition definition-object" data-traverse-target="definition-UIDMuteState">
+          <section id="definition-Time" class="definition definition-scalar" data-traverse-target="definition-Time">
             <div class="definition-group-name">
               <a href="#group-Types">Types</a>
             </div>
-            <h2 class="definition-heading">UIDMuteState</h2>
+            <h2 class="definition-heading">Time</h2>
             <div class="doc-row">
               <div class="doc-copy">
-                <div class="definition-properties doc-copy-section">
-                  <h5>Fields</h5>
-                  <table>
-                    <thead>
-                      <tr>
-                        <th>Field Name</th>
-                        <th>Description</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td data-property-name="">
-                          <span class="property-name"><code>uid</code></span> -
-                          <span class="property-type">
-                            <a href="#definition-Int"><code>Int!</code></a>
-                          </span>
-                        </td>
-                        <td> </td>
-                      </tr>
-                      <tr>
-                        <td data-property-name="">
-                          <span class="property-name"><code>mute</code></span> -
-                          <span class="property-type">
-                            <a href="#definition-Boolean"><code>Boolean!</code></a>
-                          </span>
-                        </td>
-                        <td> </td>
-                      </tr>
-                    </tbody>
-                  </table>
+                <div class="definition-description doc-copy-section">
+                  <h5>Description</h5>
+                  <p>A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the <code>date-time</code> format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.</p>
                 </div>
               </div>
               <div class="doc-examples">
@@ -1406,7 +2333,7 @@
                   <h5>Example</h5>
                   <html>
                   <head></head>
-                  <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span><span class="hljs-attr">"uid"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">123</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">"mute"</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">}</span>
+                  <body><pre><code class="hljs language-gql"><span class="hljs-symbol">"10:15:30Z"</span>
 </code></pre> </body>
                   </html>
                 </div>
@@ -1432,15 +2359,6 @@
                     <tbody>
                       <tr>
                         <td data-property-name="">
-                          <span class="property-name"><code>name</code></span> -
-                          <span class="property-type">
-                            <a href="#definition-String"><code>String!</code></a>
-                          </span>
-                        </td>
-                        <td> </td>
-                      </tr>
-                      <tr>
-                        <td data-property-name="">
                           <span class="property-name"><code>email</code></span> -
                           <span class="property-type">
                             <a href="#definition-String"><code>String!</code></a>
@@ -1457,21 +2375,18 @@
                   <h5>Example</h5>
                   <html>
                   <head></head>
-                  <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
-  <span class="hljs-attr">"name"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"email"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span>
-<span class="hljs-punctuation">}</span>
+                  <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span><span class="hljs-attr">"email"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">}</span>
 </code></pre> </body>
                   </html>
                 </div>
               </div>
             </div>
           </section>
-          <section id="definition-UserCredentials" class="definition definition-object" data-traverse-target="definition-UserCredentials">
+          <section id="definition-VercelStatus" class="definition definition-object" data-traverse-target="definition-VercelStatus">
             <div class="definition-group-name">
               <a href="#group-Types">Types</a>
             </div>
-            <h2 class="definition-heading">UserCredentials</h2>
+            <h2 class="definition-heading">VercelStatus</h2>
             <div class="doc-row">
               <div class="doc-copy">
                 <div class="definition-properties doc-copy-section">
@@ -1486,7 +2401,16 @@
                     <tbody>
                       <tr>
                         <td data-property-name="">
-                          <span class="property-name"><code>rtc</code></span> -
+                          <span class="property-name"><code>status</code></span> -
+                          <span class="property-type">
+                            <a href="#definition-DeployStatus"><code>DeployStatus!</code></a>
+                          </span>
+                        </td>
+                        <td> </td>
+                      </tr>
+                      <tr>
+                        <td data-property-name="">
+                          <span class="property-name"><code>message</code></span> -
                           <span class="property-type">
                             <a href="#definition-String"><code>String!</code></a>
                           </span>
@@ -1495,18 +2419,18 @@
                       </tr>
                       <tr>
                         <td data-property-name="">
-                          <span class="property-name"><code>rtm</code></span> -
+                          <span class="property-name"><code>url</code></span> -
                           <span class="property-type">
-                            <a href="#definition-String"><code>String</code></a>
+                            <a href="#definition-String"><code>String!</code></a>
                           </span>
                         </td>
                         <td> </td>
                       </tr>
                       <tr>
                         <td data-property-name="">
-                          <span class="property-name"><code>uid</code></span> -
+                          <span class="property-name"><code>appname</code></span> -
                           <span class="property-type">
-                            <a href="#definition-Int"><code>Int!</code></a>
+                            <a href="#definition-String"><code>String!</code></a>
                           </span>
                         </td>
                         <td> </td>
@@ -1521,9 +2445,10 @@
                   <html>
                   <head></head>
                   <body><pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
-  <span class="hljs-attr">"rtc"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"rtm"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"uid"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">987</span>
+  <span class="hljs-attr">"status"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"SUCCESS"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"message"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"url"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"appname"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span>
 <span class="hljs-punctuation">}</span>
 </code></pre> </body>
                   </html>

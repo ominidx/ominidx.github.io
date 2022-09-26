@@ -1,0 +1,15 @@
+spectaql:
+
+introspection:
+  schemaFile: /Users/omkar/Downloads/sdl_managed_core.gql
+
+
+info:
+  title: Managed Core - GraphQL API
+
+
+servers:
+  - url: 'https://ms-dev.rteappbuilder.com/query'
+    description: Dev
+    production: false
+

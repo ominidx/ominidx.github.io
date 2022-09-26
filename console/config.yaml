@@ -1,15 +1,15 @@
 spectaql:
 
 introspection:
-  schemaFile: /Users/omkar/Downloads/sdl_managed_core.gql
+  schemaFile: sdl_console.gql
 
 
 info:
-  title: Managed Core - GraphQL API
+  title: Console V2 - GraphQL API
 
 
 servers:
-  - url: 'https://ms-dev.rteappbuilder.com/query'
+  - url: 'https://dev-v3.rteappbuilder.com/query'
     description: Dev
     production: false
 
