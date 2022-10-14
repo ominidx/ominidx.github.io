@@ -9,7 +9,7 @@ info:
 
 
 servers:
-  - url: 'https://dev-v3.rteappbuilder.com/query'
+  - url: 'https://dev-v2.rteappbuilder.com/query'
     description: Dev
     production: false
 
